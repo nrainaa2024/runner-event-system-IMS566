@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Details - URUNNER</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif; 
+    }
+    
+    .bg {
+      background-color: #f7f9fc;
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 150px; /* Space for footer */
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #e64a02;
+      padding-top: 140px;
+      z-index: 1000;
+    }
+
+    .sidebar-logo {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .sidebar-logo img {
+      max-width: 120px;
+      width: 80%;
+      height: auto;
+    }
+
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 15px 25px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .sidebar a:hover {
+      background-color: #ff7e00;
+    }
+
+    .sidebar .logout {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 22px;
+      color: #000000;
+      cursor: pointer;
+      z-index: 1100;
+      display: none;
+    }
+
+    /* Main Content */
+    .content {
+      margin-left: 250px;
+      padding: 30px;
+      padding-bottom: 100px; /* Extra space for footer */
+    }
+
+    /* Banners */
+    .banner {
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 0 0 10px 10px;
+      margin-bottom: 2rem;
+    }
+    
+    .banner-1 { background: linear-gradient(135deg, #e64a02, #ff7e00); }
+    .banner-2 { background: linear-gradient(135deg, #1e90ff, #00bfff); }
+    .banner-3 { background: linear-gradient(135deg, #28a745, #85e085); }
+    .banner-4 { background: linear-gradient(135deg, #6f42c1, #b085e0); }
+    .banner-5 { background: linear-gradient(135deg, #fd7e14, #ffc078); }
+
+    /* Cards */
+    .card {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    /* Buttons */
+    .register-btn {
+      background: #ff7e00;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-weight: 500;
+    }
+    
+    .register-btn:hover {
+      background: #e64a02;
+    }
+
+    /* Carousel Controls */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(1);
+    }
+
+    /* Footer */
+    .footer {
+      background: #212529;
+      color: #fff;
+      padding: 1.5rem;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: calc(100% - 250px);
+      left: 250px;
+      z-index: 100;
+    }
+
+    .social-icons a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 1.2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      body {
+        padding-left: 0;
+      }
+      
+      .sidebar {
+        transform: translateX(-250px);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .content {
+        margin-left: 0;
+      }
+      
+      .footer {
+        width: 100%;
+        left: 0;
+      }
+      
+      .toggle-btn {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+    <!-- Toggle Button -->
+    <i class="fas fa-bars toggle-btn" id="toggleBtn"></i>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <img src="image/new_logo_urunner.png" alt="URUNNER Logo">
+      </div>
+      
+      <a href="dashboard.html"><i class="fas fa-gauge me-2"></i> Dashboard</a>
+      <a href="event-detail.html" class="active"><i class="fas fa-calendar-days me-2"></i> Event Details</a>
+      <a href="events-list.html"><i class="fas fa-list-check me-2"></i> Event List</a>
+      <a href="profile.html"><i class="fas fa-user me-2"></i> Profile</a>
+      
+      <div class="logout">
+        <a href="login.html"><i class="fas fa-right-from-bracket me-2"></i> Logout</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="mainContent">
+      <!-- Carousel with all 5 event slides -->
+      <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Slide 1: Campus Night Run -->
+          <div class="carousel-item active">
+            <div class="banner banner-1">
+              <h1>Campus Night Run 2025</h1>
+              <p class="lead">July 10, 2025 • 8:00PM - 10:00PM</p>
+            </div>
+            <div class="container-fluid mt-4">
+              <div class="row g-4">
+                <div class="col-lg-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fas fa-calendar-alt text-warning me-2"></i> Event Details</h5>
+                      <p><strong>Date:</strong> 2025-07-10</p>
+                      <p><strong>Location:</strong> UiTM Stadium</p>
+                      <p><strong>Distance:</strong> 5KM</p>
+                      <hr>
+                      <p class="card-text">A festive night-time run through campus with music & glow sticks provided.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="text-warning"><i class="fas fa-calendar-check me-2"></i>Ready to Run?</h5>
+                      <button class="btn register-btn mt-3">Register Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Charity Marathon -->
+          <div class="carousel-item">
+            <div class="banner banner-2">
+              <h1>Charity Marathon 2025</h1>
+              <p class="lead">August 5, 2025 • 6:00AM - 12:00PM</p>
+            </div>
+            <div class="container-fluid mt-4">
+              <div class="row g-4">
+                <div class="col-lg-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fas fa-calendar-alt text-info me-2"></i> Event Details</h5>
+                      <p><strong>Date:</strong> 2025-08-05</p>
+                      <p><strong>Location:</strong> Shah Alam</p>
+                      <p><strong>Distance:</strong> 10KM</p>
+                      <hr>
+                      <p class="card-text">Run for a cause - proceeds go to local charities.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="text-info"><i class="fas fa-calendar-check me-2"></i>Join the Cause</h5>
+                      <button class="btn btn-info text-white mt-3">Register Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 3: Sports Week Fun Run -->
+          <div class="carousel-item">
+            <div class="banner banner-3">
+              <h1>Sports Week Fun Run 2025</h1>
+              <p class="lead">September 1, 2025 • 7:00AM - 9:00AM</p>
+            </div>
+            <div class="container-fluid mt-4">
+              <div class="row g-4">
+                <div class="col-lg-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fas fa-calendar-alt text-success me-2"></i> Event Details</h5>
+                      <p><strong>Date:</strong> 2025-09-01</p>
+                      <p><strong>Location:</strong> Campus Ground</p>
+                      <p><strong>Distance:</strong> 3KM</p>
+                      <hr>
+                      <p class="card-text">Perfect for all fitness levels with refreshments.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="text-success"><i class="fas fa-calendar-check me-2"></i>Let's Run!</h5>
+                      <button class="btn btn-success mt-3">Register Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 4: Annual Forest Run -->
+          <div class="carousel-item">
+            <div class="banner banner-4">
+              <h1>Annual Forest Run 2025</h1>
+              <p class="lead">October 15, 2025 • 6:30AM - 8:30AM</p>
+            </div>
+            <div class="container-fluid mt-4">
+              <div class="row g-4">
+                <div class="col-lg-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fas fa-calendar-alt text-primary me-2"></i> Event Details</h5>
+                      <p><strong>Date:</strong> 2025-10-15</p>
+                      <p><strong>Location:</strong> Putrajaya</p>
+                      <p><strong>Distance:</strong> 7KM</p>
+                      <hr>
+                      <p class="card-text">Scenic forest trail with eco-friendly stations.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="text-primary"><i class="fas fa-calendar-check me-2"></i>Join Now</h5>
+                      <button class="btn btn-primary mt-3">Register Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 5: City Lights Jog -->
+          <div class="carousel-item">
+            <div class="banner banner-5">
+              <h1>City Lights Jog 2025</h1>
+              <p class="lead">December 12, 2025 • 7:30PM - 9:00PM</p>
+            </div>
+            <div class="container-fluid mt-4">
+              <div class="row g-4">
+                <div class="col-lg-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fas fa-calendar-alt text-warning me-2"></i> Event Details</h5>
+                      <p><strong>Date:</strong> 2025-12-12</p>
+                      <p><strong>Location:</strong> Kuala Lumpur</p>
+                      <p><strong>Distance:</strong> 5KM</p>
+                      <hr>
+                      <p class="card-text">Night-time city run past iconic landmarks.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <h5 class="text-warning"><i class="fas fa-calendar-check me-2"></i>Let's Jog!</h5>
+                      <button class="btn btn-warning mt-3">Register Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+      <footer>
+        <div class="container text-center">
+          <p class="mb-2" style="font-family:'Poppins',sans-serif; color:#fff; font-size:1.07rem;">
+            &copy; 2025 URUNNER | Faculty of Information Management, UiTM Puncak Perdana
+          </p>
+          <div style="display:flex; justify-content:center; align-items:center; gap:0.6rem; font-size:1.2rem;">
+            <span style="color:#fff;">Follow us:</span>
+            <a href="#" style="color:#e64a02;"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" style="color:#e64a02;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color:#e64a02;"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Toggle Sidebar Script -->
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    
+    toggleBtn.addEventListener('click', function() {
+      sidebar.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

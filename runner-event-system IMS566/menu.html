@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>URUNNER | Home</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-orange: #e64a02;
+      --brand-orange-light: #ff7e00;
+      --brand-orange-hover: linear-gradient(135deg, #e64a02 0%, #ff7e00 100%);
+      --nav-bg: #e64a02;
+      --overlay-bg: rgba(0,0,0,0.5);
+      --btn-contact: #ffb70ee8;
+      --btn-contact-hover: #ffb70ee8;
+      --text-light: #fff;
+      --text-dark: #212529;
+      --font-stack: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-stack);
+      color: var(--text-dark);
+      padding-top: 70px; /* Added for fixed navbar */
+      background: url('g') no-repeat center center/cover;
+    }
+
+    /* Enhanced Navbar Styling */
+    .navbar {
+      background-color: var(--nav-bg);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 10px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-logo img {
+      height: 80px; /* Optimal balanced size */
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .navbar-logo:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Gradient Hover Effect */
+    .nav-link {
+      color: var(--text-light) !important;
+      margin: 0 10px;
+      padding: 8px 15px !important;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--brand-orange-hover);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::before {
+      width: 100%;
+    }
+    
+    .nav-link.active {
+      font-weight: 600;
+    }
+    
+    .nav-link.active::before {
+      width: 100%;
+    }
+
+    /* Contact Button */
+    .btn-contact {
+      background-color: var(--btn-contact);
+      color: var(--text-dark);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-contact:hover {
+      background-color: var(--btn-contact-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('image/running-mas-que-moda-.jpg') no-repeat center/cover;
+      z-index: -1;
+    }
+    .hero .overlay {
+      background-color: var(--overlay-bg);
+      padding: 3rem 2rem;
+      max-width: 700px;
+      width: 90%;
+      text-align: center;
+      border-radius: 8px;
+      color: var(--text-light);
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .hero p.lead {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .btn-primary {
+      background-color: var(--brand-orange);
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: var(--brand-orange-light);
+    }
+
+    /* Programs Section */
+    .programs {
+      padding: 4rem 0;
+      background-color: #f7f9fc;
+    }
+    .programs h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      color: var(--brand-orange);
+    }
+    .programs .card {
+      border: none;
+      border-radius: 0.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .programs .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .programs .icon {
+      font-size: 2.5rem;
+      color: var(--brand-orange);
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #212529;
+      color: #ccc;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+    footer a {
+      color: var(--brand-orange);
+      margin: 0 0.5rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        padding-top: 20px;
+      }
+      
+      .nav-link {
+        margin: 5px 0;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .navbar-logo img {
+        height: 50px; /* Perfect mobile size */
+      }
+      
+      body {
+        padding-top: 60px;
+      }
+      
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Enhanced Navbar with Connected Links -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a href="index.html" class="navbar-logo">
+        <img src="image/new_logo_urunner.png" alt="URUNNER Logo">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">DASHBOARD</a></li>
+          <li class="nav-item"><a class="nav-link" href="event-list.html">EVENT LIST</a></li>
+          <li class="nav-item"><a class="nav-link" href="event-detail.html">EVENT DETAIL</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html">PROFILE</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-contact ms-lg-3">CONTACT US</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Connected Button -->
+  <section class="hero">
+    <div class="overlay">
+      <h1>Run with Passion and Purpose</h1>
+      <p class="lead">Lace-up your shoes, set your goals, and let's run together towards a healthier, happier, and faster you.</p>
+      <a href="dashboard.html" class="btn btn-primary btn-lg">LET'S RUN</a>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section class="programs">
+    <div class="container">
+      <h2>Our Programs</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 text-center">
+          <div class="card p-4">
+            <div class="icon"><i class="fas fa-star"></i></div>
+            <h5 class="mt-2">Beginner Fun Run</h5>
+            <p>Perfect for first-timers: 3KM campus route with refreshments.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 text-center">
+          <div class="card p-4">
+            <div class="icon"><i class="fas fa-medal"></i></div>
+            <h5 class="mt-2">Charity Marathon</h5>
+            <p>10KM city marathon raising funds for local charities.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 text-center">
+          <div class="card p-4">
+            <div class="icon"><i class="fas fa-leaf"></i></div>
+            <h5 class="mt-2">Eco Trail Run</h5>
+            <p>7KM scenic forest trail supporting sustainability initiatives.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 URUNNER | Faculty of Information Management, UiTM Puncak Perdana</p>
+    <p>Follow us:
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

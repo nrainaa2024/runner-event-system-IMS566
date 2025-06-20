@@ -1,0 +1,127 @@
+/* General Styles */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; 
+}
+
+/* Background Container */
+.bg {
+    background-image: url('https://pusatsukan.uitm.edu.my/images/new2022/6161674077_9bc45047c7_b.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: calc(100vh - 100px); /* Adjust for footer height */
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+}
+
+/* Logo Positioning */
+.logo-left {
+    position: fixed;
+    top: 36px; 
+    left: 48px;
+    max-width: 120px; 
+    width: auto;
+    height: auto; 
+    z-index: 1001;
+}
+
+/* Login Container */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Logo inside Login Container */
+.logo {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100px;
+}
+
+/* Headings */
+h3 {
+    font-family: 'Oswald', sans-serif; 
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Button Styles */
+.btn-primary, .google-btn {
+    color: white !important;  
+    border: none;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.btn-primary {
+    background-color: #f75205 !important;  
+}
+
+.btn-primary:hover {
+    background-color: #e64a02 !important; 
+}
+
+.google-btn {
+    background-color: #4285F4;  
+}
+
+.google-btn:hover {
+    background-color: #357ae8 !important;  
+}
+
+    footer {
+  background: #212529;
+  color: #fff;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+footer a:hover { color: #ff7e00 !important; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        left: -250px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .content.active {
+        margin-left: 250px;
+      }
+    }
+
+.social-icons {
+    margin-top: 0.5rem; /* Space between text and icons */
+}
+
+.social-icons a {
+    color: #ccc;
+    margin: 0 5px; /* Space between icons */
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: white; /* Change color on hover */
+}

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event List | URUNNER</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f9fc;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #e64a02;
+      padding-top: 140px;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .sidebar-logo {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+    .sidebar-logo img {
+      max-width: 120px;
+      width: 80%;
+      height: auto;
+    }
+
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 15px 25px;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-weight: 500;
+    }
+
+    .sidebar a:hover {
+      background-color: #ff7e00;
+    }
+
+    .sidebar .logout {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+
+    /* Main content */
+    .content {
+      margin-left: 250px;
+      padding: 30px;
+      transition: margin-left 0.3s;
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 22px;
+      color: #000000;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .logo-left {
+      position: absolute;
+      top: 10px;
+      left: 80px;
+      max-width: 120px;
+    }
+    .header-box {
+      background-color: #e64a02;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 900px;
+    }
+
+    .header-box h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .header-box p {
+      font-size: 1rem;
+    }
+     .dashboard-header {
+      background: linear-gradient(90deg, #e64a02, #ff7e00);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      color: #e64a02;
+      font-weight: 600;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    /* Event Cards */
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      margin-bottom: 30px;
+      background-color: white;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body h5 {
+      color: #e64a02;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .card-body p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .table thead {
+      background-color: #e64a02;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #ff7e00;
+      border-color: #ff7e00;
+    }
+
+    .btn-primary:hover {
+      background-color: #e64a02;
+      border-color: #e64a02;
+    }
+
+    .map-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+ .timeline {
+    position: relative;
+    padding-left: 3rem;
+    margin-top: 1rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.25rem;
+    width: 2px;
+    height: 100%;
+    background-color: #e9ecef;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item .icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: #fff;
+    border: 2px solid #0d6efd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d6efd;
+    font-size: 1rem;
+  }
+  .timeline-item .body {
+    margin-left: 3rem;
+  }
+  .timeline-item .body .time {
+    font-weight: 600;
+    color: #343a40;
+  }
+  .timeline-item .body .desc {
+    margin: .25rem 0 0;
+    color: #6c757d;
+  }
+
+    .footer {
+  background: #212529;
+  color: #fff;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+  .footer a:hover
+ { color: #ff7e00 !important; }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        left: -250px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .content.active {
+        margin-left: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Toggle Icon -->
+  <i class="fas fa-bars toggle-btn" id="toggleBtn"></i>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+   <div class="sidebar-logo">
+      <img src="image/new_logo_urunner.png" alt="URUNNER Logo">
+    </div>
+
+   <a href="dashboard.html"><i class="fas fa-gauge me-2"></i> Dashboard</a>
+    <a href="event-detail.html"><i class="fas fa-calendar-days me-2"></i> Event Details</a>
+    <a href="events-list.html"><i class="fas fa-list-check me-2"></i> Event List</a>
+    <a href="profile.html"><i class="fas fa-user me-2"></i> Profile</a>
+
+    <div class="logout">
+      <a href="#"><i class="fas fa-right-from-bracket me-2"></i> Logout</a>
+    </div>
+  </div>
+
+  <!-- Logo -->
+  <img src="image/new_logo_urunner.png" alt="URUNNER Logo" class="logo-left"/>
+
+  <!-- Main Content -->
+  <div class="content" id="mainContent">
+    <div class="container-fluid">
+      <div class="dashboard-header text-center">
+        <h2>Upcoming Events</h2>
+        <p>Join us for an exciting journey and run with us!</p>
+      </div>
+
+     <!-- Event List Section -->
+<h4 class="section-title">All Upcoming Events</h4>
+<div class="row g-4">
+  <!-- 1st card -->
+  <div class="col-md-4">
+    <div class="card p-3 h-100">
+      <div class="card-body">
+        <h5><i class="fas fa-calendar-alt text-primary me-2"></i> Campus Night Run</h5>
+        <p><strong>Date:</strong> 2025-07-10</p>
+        <p><strong>Location:</strong> UiTM Stadium</p>
+        <p><strong>Distance:</strong> 5KM</p>
+
+        <!-- toggle button -->
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#details1"
+          aria-expanded="false"
+          aria-controls="details1">
+          More Details
+        </button>
+
+        <!-- collapsible content -->
+        <div class="collapse mt-3" id="details1">
+          <div class="card card-body">
+            <p><strong>Description:</strong> A festive night-time run through campus with music & glow sticks provided.</p>
+            <p><strong>Fee:</strong> RM20 per runner</p>
+            <p><strong>Registration:</strong> <a href="#">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2nd card -->
+  <div class="col-md-4">
+    <div class="card p-3 h-100">
+      <div class="card-body">
+        <h5><i class="fas fa-calendar-alt text-primary me-2"></i> Charity Marathon</h5>
+        <p><strong>Date:</strong> 2025-08-05</p>
+        <p><strong>Location:</strong> Shah Alam</p>
+        <p><strong>Distance:</strong> 10KM</p>
+
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#details2"
+          aria-expanded="false"
+          aria-controls="details2">
+          More Details
+        </button>
+
+        <div class="collapse mt-3" id="details2">
+          <div class="card card-body">
+            <p><strong>Description:</strong> Run for a cause – proceeds go to local charities.</p>
+            <p><strong>Fee:</strong> RM35 per runner</p>
+            <p><strong>Registration:</strong> <a href="#">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3rd card -->
+  <div class="col-md-4">
+    <div class="card p-3 h-100">
+      <div class="card-body">
+        <h5><i class="fas fa-calendar-alt text-primary me-2"></i> Sports Week Fun Run</h5>
+        <p><strong>Date:</strong> 2025-09-01</p>
+        <p><strong>Location:</strong> Campus Ground</p>
+        <p><strong>Distance:</strong> 3KM</p>
+
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#details3"
+          aria-expanded="false"
+          aria-controls="details3">
+          More Details
+        </button>
+
+        <div class="collapse mt-3" id="details3">
+          <div class="card card-body">
+            <p><strong>Description:</strong> A fun 3KM run with friendly competition and refreshments.</p>
+            <p><strong>Fee:</strong> RM15 per runner</p>
+            <p><strong>Registration:</strong> <a href="#">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4th card -->
+  <div class="col-md-4">
+    <div class="card p-3 h-100">
+      <div class="card-body">
+        <h5><i class="fas fa-calendar-alt text-primary me-2"></i> Annual Forest Run</h5>
+        <p><strong>Date:</strong> 2025-10-15</p>
+        <p><strong>Location:</strong> Putrajaya</p>
+        <p><strong>Distance:</strong> 7KM</p>
+
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#details4"
+          aria-expanded="false"
+          aria-controls="details4">
+          More Details
+        </button>
+
+        <div class="collapse mt-3" id="details4">
+          <div class="card card-body">
+            <p><strong>Description:</strong> Scenic forest trail with eco-friendly stations.</p>
+            <p><strong>Fee:</strong> RM25 per runner</p>
+            <p><strong>Registration:</strong> <a href="#">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5th card -->
+  <div class="col-md-4">
+    <div class="card p-3 h-100">
+      <div class="card-body">
+        <h5><i class="fas fa-calendar-alt text-primary me-2"></i> City Lights Jog</h5>
+        <p><strong>Date:</strong> 2025-12-12</p>
+        <p><strong>Location:</strong> Kuala Lumpur</p>
+        <p><strong>Distance:</strong> 5KM</p>
+
+        <button
+          class="btn btn-primary w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#details5"
+          aria-expanded="false"
+          aria-controls="details5">
+          More Details
+        </button>
+
+        <div class="collapse mt-3" id="details5">
+          <div class="card card-body">
+            <p><strong>Description:</strong> Night-time city run past iconic landmarks.</p>
+            <p><strong>Fee:</strong> RM30 per runner</p>
+            <p><strong>Registration:</strong> <a href="#">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <!-- Event Details Section -->
+      <h4 class="section-title">Event Details</h4>
+      
+
+     <!-- Event Timeline -->
+<div class="card p-3 mb-4">
+  <h5 class="mb-4">Tentative Event Timeline</h5>
+  <ul class="timeline">
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-clipboard-check"></i></div>
+      <div class="body">
+        <div class="time">05:30 AM</div>
+        <div class="desc">Registration &amp; Bib Collection</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-dumbbell"></i></div>
+      <div class="body">
+        <div class="time">06:30 AM</div>
+        <div class="desc">Group Warm-Up &amp; Stretch</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-flag"></i></div>
+      <div class="body">
+        <div class="time">07:00 AM</div>
+        <div class="desc">Flag-Off: 10 KM Open Run</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-flag-checkered"></i></div>
+      <div class="body">
+        <div class="time">07:05 AM</div>
+        <div class="desc">Flag-Off: 5 KM Fun Run</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-child"></i></div>
+      <div class="body">
+        <div class="time">07:10 AM</div>
+        <div class="desc">Kids’ Dash (2 KM)</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-running"></i></div>
+      <div class="body">
+        <div class="time">08:30 AM</div>
+        <div class="desc">Cool-Down &amp; Photo Op</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-trophy"></i></div>
+      <div class="body">
+        <div class="time">09:00 AM</div>
+        <div class="desc">Award Ceremony</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-gift"></i></div>
+      <div class="body">
+        <div class="time">09:30 AM</div>
+        <div class="desc">Lucky Draw &amp; Sponsor Booths</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="icon"><i class="fas fa-check"></i></div>
+      <div class="body">
+        <div class="time">10:00 AM</div>
+        <div class="desc">Closing Remarks &amp; Event Ends</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+      <!-- Event Perks -->
+      <div class="card p-3 mb-5">
+  <h5 class="mb-3">What You’ll Get</h5>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-tshirt fa-lg me-3 text-primary"></i>
+      Performance T-Shirt
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-medal fa-lg me-3 text-warning"></i>
+      Finisher Medal
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-stopwatch fa-lg me-3 text-success"></i>
+      Timing Chip &amp; Live Results
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-gift fa-lg me-3 text-info"></i>
+      Goodie Bag (snacks &amp; samples)
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-coffee fa-lg me-3 text-secondary"></i>
+      Post-Race Refreshments
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-camera-retro fa-lg me-3 text-dark"></i>
+      Free Event Photos &amp; E-Certificate
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-briefcase-medical fa-lg me-3 text-danger"></i>
+      Medical &amp; Hydration Stations
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-ticket-alt fa-lg me-3 text-muted"></i>
+      Discounts &amp; Vouchers
+    </li>
+    <li class="list-group-item d-flex align-items-center">
+      <i class="fas fa-shuttle-van fa-lg me-3 text-primary"></i>
+      Shuttle Service &amp; Parking
+    </li>
+  </ul>
+</div>
+
+    <!-- Route Map (Enhanced) -->
+<div class="card p-3 mb-4">
+  <h5>Route Map</h5>
+  <div class="map-container mb-3">
+    <!-- Replace the src below with your own Google Maps embed link -->
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11268.030599794623!2d101.48578562834692!3d3.1341938899497954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc51962c5fb867%3A0x908fe72ee248f8fa!2sUiTM%20Puncak%20Perdana!5e0!3m2!1sen!2smy!4v1750349215885!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      frameborder="0"
+      allowfullscreen=""
+      loading="lazy"
+    ></iframe>
+  </div>
+  <p>
+    Zoom in to explore every twist and turn of the course before race day—know
+    your checkpoints, water stations, and elevation changes ahead of time!
+  </p>
+  <a
+    href="https://www.google.com/maps/dir/?api=1&origin=UiTM+Stadium&destination=Putrajaya"
+    target="_blank"
+    class="btn btn-primary w-100"
+  >
+    Open Full-Screen Map
+  </a>
+</div>
+
+
+<!-- Footer Section -->
+      <footer class="footer">
+        <div class="container text-center">
+          <p class="mb-2" style="font-family:'Poppins',sans-serif; color:#fff; font-size:1.07rem;">
+            &copy; 2025 URUNNER | Faculty of Information Management, UiTM Puncak Perdana
+          </p>
+          <div style="display:flex; justify-content:center; align-items:center; gap:0.6rem; font-size:1.2rem;">
+            <span style="color:#fff;">Follow us:</span>
+            <a href="#" style="color:#e64a02;"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" style="color:#e64a02;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color:#e64a02;"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+
+
+    <!-- Bootstrap JS (includes Popper) for collapse functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- Toggle Sidebar Script -->
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
